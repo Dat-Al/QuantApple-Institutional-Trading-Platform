@@ -1,0 +1,34 @@
+PROPRIETARY AND CONFIDENTIAL SOURCE MATERIAL
+COPYRIGHT (C) 2026. ALL RIGHTS RESERVED.
+
+This software and its documentation, including but not limited to source code,
+specifications, designs, algorithms, architectures, workflows, and benchmarks
+(collectively, the "Work"), are the exclusive intellectual property of the author.
+
+TERMS AND CONDITIONS OF USE:
+
+NO RIGHT TO COPY OR DISTRIBUTE:
+No part of this Work may be reproduced, copied, distributed, sublicensed,
+leased, rented, modified, adapted, translated, or transmitted in any form
+or by any means, electronic, mechanical, photocopying, recording, or otherwise,
+without express prior written authorization from the copyright holder.
+
+EVALUATION ONLY:
+This repository is published solely for portfolio review and technical
+architecture evaluation by prospective employers and authorized partners.
+Running, deploying, commercializing, or executing the system in live,
+staging, or production environments without permission is strictly prohibited.
+
+NO REVERSE ENGINEERING / AI INGESTION:
+You may not decompile, reverse engineer, disassemble, or derive source
+specifications from this Work, nor use this Work to train, fine-tune,
+or prompt any artificial intelligence models, machine learning models,
+or automated code-generation agents without prior written consent.
+
+DISCLAIMER:
+THE WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL
+THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE WORK OR THE USE OR OTHER DEALINGS IN THE WORK.

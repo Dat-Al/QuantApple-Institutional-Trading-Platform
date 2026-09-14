@@ -1,0 +1,52 @@
+# QuantApple Security & Sanitization Gitignore
+
+# Prevent accidental leak of core code, models, configs, and credentials
+# Restrict all source python implementations if publishing public showcase
+src/
+engine/
+models/
+strategies/
+dags/
+scripts/
+
+# Data and Artifacts
+*.pkl
+*.joblib
+*.h5
+*.onnx
+*.pt
+*.parquet
+*.csv
+data/
+artifacts/
+
+# Secrets & Environment variables
+.env
+.env.*
+*.pem
+*.key
+*.cert
+credentials.json
+secrets/
+
+# Database and Storage mounts
+timescale_data/
+minio_data/
+pgadmin_data/
+prometheus_data/
+grafana_data/
+
+# Python & IDE artifacts
+pycache/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+env/
+venv/
+.idea/
+.vscode/
+*.swp
+*.DS_Store
