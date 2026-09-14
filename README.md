@@ -89,12 +89,14 @@ Rather than relying on brittle single-model forecasts, QuantApple implements an 
 
 ### Formal Consensus Execution Gate
 
+$$
 \text{Action}_t = 
 \begin{cases} 
 \mathbf{BUY} & \text{if } |\hat{y}_{\text{XGB}}| > \theta_{\text{mag}} \;\wedge\; \hat{p}_{\text{RF}} > \theta_{\text{prob}} \;\wedge\; S_{\text{HMM}} \in \{\text{Bullish, Steady}\} \;\wedge\; \text{sgn}(\hat{y}_{\text{LSTM}}) > 0 \\
 \mathbf{SELL} & \text{if conditions invert symmetrically} \\
 \mathbf{HOLD} & \text{otherwise (Capital Preservation Default)}
 \end{cases}
+$$
 
 ### Key Research Contribution: `RollingTimeSeriesSplit`
 To eliminate look-ahead bias while preventing data obsolescence, this project introduced **`RollingTimeSeriesSplit`** — an anchored, sliding temporal cross-validator with fixed-width rolling windows.
@@ -107,9 +109,10 @@ To eliminate look-ahead bias while preventing data obsolescence, this project in
 * **Engine**: PostgreSQL 14+ supercharged with **TimescaleDB** Hypertables.
 * **Storage Optimization**: Partitioned by time chunks with automated data retention policies and SQL `time_bucket()` analytical aggregations.
 * **Audit Trail & Financial Traceability**:
+$$
 \text{apple\_model\_features} \longrightarrow \text{agent\_config} \longrightarrow \text{apple\_predictions} \longrightarrow \text{portfolio\_performance}
 Every dollar gained or lost is deterministically linked via relational foreign keys back to the exact feature snapshot, model run ID, and hyperparameter configuration.
-
+$$
 ---
 
 ## MLOps & Production Governance
