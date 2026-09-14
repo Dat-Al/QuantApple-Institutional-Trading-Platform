@@ -83,7 +83,7 @@ Rather than relying on brittle single-model forecasts, QuantApple implements an 
 | Model Component | Mathematical Foundation | Target Variable | Operational Purpose |
 | :--- | :--- | :--- | :--- |
 | **XGBoost Regressor** | Regularized Gradient Tree Boosting | $\Delta P_{t+1}$ Magnitude | Signal amplitude filter (covers slippage & fees) |
-| **LSTM Recurrent Net** | Deep Gated Recurrent Units (TensorFlow) | Long-Horizon Temporal Dependencies | Multi-period cyclical trend validation |
+| **LSTM** | Deep Gated Recurrent Units (TensorFlow) | Long-Horizon Temporal Dependencies | Multi-period cyclical trend validation |
 | **Random Forest Classifier**| Bootstrap Aggregation / Gini Impurity | $P(	ext{Up} \mid X_t) \in [0, 1]$ | Directional win probability threshold |
 | **Hidden Markov Model (HMM)**| Continuous Gaussian Emission States | Latent Market Regime $S_t$ | Risk regime gatekeeper (halts trading in volatile regimes) |
 
