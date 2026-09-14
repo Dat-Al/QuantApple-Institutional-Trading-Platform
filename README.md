@@ -20,42 +20,44 @@ Addressing latency, emotional bias, and alpha degradation, QuantApple decouples 
 ## System Architecture Topology
 
 ```mermaid
-graph TD
-    %% SUBGRAPHS
-    subgraph Net_Front ["DMZ / Presentation Layer (frontend-nw)"]
-        ST[Streamlit Command Cockpit]
-        GR[Grafana Observability Suite]
-        PA[pgAdmin 4 Administration]
+flowchart TD
+    subgraph Net_Front["DMZ / Presentation Layer (frontend-nw)"]
+        ST["Streamlit Command Cockpit"]
+        GR["Grafana Observability Suite"]
+        PA["pgAdmin 4 Administration"]
     end
 
-    subgraph Net_Back ["Service Mesh Layer (backend-nw)"]
-        AA[FastAPI Auth Service <br/>(OAuth2 / JWT)]
-        DA[FastAPI Market & Data Service]
-        EA[FastAPI Execution Engine <br/>(Paper/Mock Broker)]
-        PR[Prometheus Time-Series Scraper]
+    subgraph Net_Back["Service Mesh Layer (backend-nw)"]
+        AA["FastAPI Auth Service (OAuth2 / JWT)"]
+        DA["FastAPI Market & Data Service"]
+        EA["FastAPI Execution Engine (Mock Broker)"]
+        PR["Prometheus Time-Series Scraper"]
     end
 
-    subgraph Net_Data ["Persistence & High-Compute Core (data-nw)"]
-        DB[(TimescaleDB Hypertables <br/>Time-Series Engine)]
-        AF_S[Airflow Scheduler]
-        AF_W[Airflow Celery Worker]
-        MN[(MinIO S3-Compatible Object Store)]
-        MF[MLflow Model Registry & Tracking]
+    subgraph Net_Data["Persistence & Compute Core (data-nw)"]
+        DB[("TimescaleDB Hypertables Engine")]
+        AF_S["Airflow Scheduler"]
+        AF_W["Airflow Celery Worker"]
+        MN[("MinIO S3-Compatible Store")]
+        MF["MLflow Model Registry & Tracking"]
     end
 
-    %% INTER-TIER FLOWS
-    ST & GR -.->|HTTPS / Bearer JWT| DA
+    ST -.->|HTTPS / Bearer JWT| DA
+    GR -.->|HTTPS / Bearer JWT| DA
     DA -->|Auth & Claims Verification| AA
-    DA -->|SQL Optimized Aggregations| DB
+    DA -->|SQL Analytical Aggregations| DB
 
     AF_W -->|Batch Hourly ETL| DB
-    AF_W -->|Model Serialization Artifacts| MN
+    AF_W -->|Model Artifacts| MN
     AF_W -->|Parameters & Metrics Logging| MF
 
     AF_S -->|Hourly Decision Pulse| EA
     EA -->|Audit & Transaction Logging| DB
 
-    PR -.->|Telemetry Scraping| AA & DA & EA & AF_W
+    PR -.->|Telemetry Scraping| AA
+    PR -.->|Telemetry Scraping| DA
+    PR -.->|Telemetry Scraping| EA
+    PR -.->|Telemetry Scraping| AF_W
 ```
 
 ---
@@ -135,6 +137,5 @@ For full terms, review the [LICENSE](./LICENSE) file.
 ## Contact & Inquiries
 
 For technical audits, recruitment discussions, or live demo requests:
-* **LinkedIn**: [Your Profile Link]
-* **Email**: [your.email@example.com]
-* **Demo Scheduling**: Available upon NDAs / formal request.
+* [**LinkedIn**](www.linkedin.com/in/ali-zeghbab)
+* [**Email**](zeghbab@proton.me)
