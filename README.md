@@ -111,8 +111,9 @@ To eliminate look-ahead bias while preventing data obsolescence, this project in
 * **Audit Trail & Financial Traceability**:
 $$
 \text{apple\_model\_features} \longrightarrow \text{agent\_config} \longrightarrow \text{apple\_predictions} \longrightarrow \text{portfolio\_performance}
-Every dollar gained or lost is deterministically linked via relational foreign keys back to the exact feature snapshot, model run ID, and hyperparameter configuration.
 $$
+Every dollar gained or lost is deterministically linked via relational foreign keys back to the exact feature snapshot, model run ID, and hyperparameter configuration.
+
 ---
 
 ## MLOps & Production Governance
