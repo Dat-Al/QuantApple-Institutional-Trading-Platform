@@ -20,21 +20,30 @@ Addressing latency, emotional bias, and alpha degradation, QuantApple decouples 
 ## System Architecture Topology
 
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'flowchart': {
+    'nodeSpacing': 70,
+    'rankSpacing': 90,
+    'curve': 'basis',
+    'useMaxWidth': false
+  }
+}}%%
 flowchart TD
-    subgraph Net_Front["DMZ / Presentation Layer (frontend-nw)"]
+    subgraph Net_Front["  DMZ / Presentation Layer (frontend-nw)  "]
         ST["Streamlit Command Cockpit"]
         GR["Grafana Observability Suite"]
         PA["pgAdmin 4 Administration"]
     end
 
-    subgraph Net_Back["Service Mesh Layer (backend-nw)"]
+    subgraph Net_Back["  Service Mesh Layer (backend-nw)  "]
         AA["FastAPI Auth Service (OAuth2 / JWT)"]
         DA["FastAPI Market & Data Service"]
         EA["FastAPI Execution Engine (Mock Broker)"]
-        PR["Prometheus Time-Series Scraper"]
+        PR["Prometheus Telemetry Scraper"]
     end
 
-    subgraph Net_Data["Persistence & Compute Core (data-nw)"]
+    subgraph Net_Data["  Persistence & Compute Core (data-nw)  "]
         DB[("TimescaleDB Hypertables Engine")]
         AF_S["Airflow Scheduler"]
         AF_W["Airflow Celery Worker"]
@@ -42,6 +51,11 @@ flowchart TD
         MF["MLflow Model Registry & Tracking"]
     end
 
+    %% Alignement spatial étendu
+    ST ~~~ GR ~~~ PA
+    AA ~~~ DA ~~~ EA
+
+    %% Liaisons de flux
     ST -.->|HTTPS / Bearer JWT| DA
     GR -.->|HTTPS / Bearer JWT| DA
     DA -->|Auth & Claims Verification| AA
@@ -75,12 +89,12 @@ Rather than relying on brittle single-model forecasts, QuantApple implements an 
 
 ### Formal Consensus Execution Gate
 
-$$	ext{Action}_t = 
- egin{cases} 
-\mathbf{BUY} & 	ext{if } |\hat{y}_{	ext{XGB}}| > 	heta_{	ext{mag}} \;\wedge\; \hat{p}_{	ext{RF}} > 	heta_{	ext{prob}} \;\wedge\; S_{	ext{HMM}} \in \{	ext{Bullish, Steady}\} \;\wedge\; 	ext{sgn}(\hat{y}_{	ext{LSTM}}) > 0 \
-\mathbf{SELL} & 	ext{if conditions invert symmetrically} \
-\mathbf{HOLD} & 	ext{otherwise (Capital Preservation Default)}
-\end{cases}$$
+\text{Action}_t = 
+\begin{cases} 
+\mathbf{BUY} & \text{if } |\hat{y}_{\text{XGB}}| > \theta_{\text{mag}} \;\wedge\; \hat{p}_{\text{RF}} > \theta_{\text{prob}} \;\wedge\; S_{\text{HMM}} \in \{\text{Bullish, Steady}\} \;\wedge\; \text{sgn}(\hat{y}_{\text{LSTM}}) > 0 \\
+\mathbf{SELL} & \text{if conditions invert symmetrically} \\
+\mathbf{HOLD} & \text{otherwise (Capital Preservation Default)}
+\end{cases}
 
 ### Key Research Contribution: `RollingTimeSeriesSplit`
 To eliminate look-ahead bias while preventing data obsolescence, this project introduced **`RollingTimeSeriesSplit`** — an anchored, sliding temporal cross-validator with fixed-width rolling windows.
@@ -93,7 +107,7 @@ To eliminate look-ahead bias while preventing data obsolescence, this project in
 * **Engine**: PostgreSQL 14+ supercharged with **TimescaleDB** Hypertables.
 * **Storage Optimization**: Partitioned by time chunks with automated data retention policies and SQL `time_bucket()` analytical aggregations.
 * **Audit Trail & Financial Traceability**:
-$$	ext{apple\_model\_features} \longrightarrow 	ext{agent\_config} \longrightarrow 	ext{apple\_predictions} \longrightarrow 	ext{portfolio\_performance}$$
+\text{apple\_model\_features} \longrightarrow \text{agent\_config} \longrightarrow \text{apple\_predictions} \longrightarrow \text{portfolio\_performance}
 Every dollar gained or lost is deterministically linked via relational foreign keys back to the exact feature snapshot, model run ID, and hyperparameter configuration.
 
 ---
